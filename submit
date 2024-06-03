@@ -1,0 +1,30 @@
+#!/bin/sh
+#SBATCH --job-name=20231214.WHAM.Lx50.nx384.ti2x.Lz6.667.posbias.rbound.nsm0
+#SBATCH --account=phy230179
+#SBATCH --partition=wholenode
+#SBATCH --mail-user=atran@physics.wisc.edu
+#SBATCH --mail-type=ALL
+#SBATCH --error=slurm-%j.err  # stderr ("-%j" default, "-%A_%a" for job arrays)
+#
+#SBATCH --exclusive
+#SBATCH --nodes=4
+#SBATCH --ntasks=512
+#SBATCH --time=0-12:00:00
+
+# Environment, libraries, path for Purdue Anvil HPC cluster
+# (NSF ACCESS allocation PHY-230179).
+# ---Aaron Tran, 2023 Nov 16
+module purge
+module load intel/19.0.5.281
+module load cmake/3.20.0
+module load impi/2019.5.281
+module load hdf5/1.10.7
+
+# OpenMPI
+#srun -n 512 ./WHAM-phase2-3d.Linux
+#srun -n 512 ./WHAM-phase2-3d.Linux --restore ./restart0/restart.0
+
+# Intel IMPI requires --mpi=pmi2 to work
+srun --mpi=pmi2 -n 512 ./WHAM-phase2-3d.Linux
+#srun --mpi=pmi2 -n 512 ./WHAM-phase2-3d.Linux --restore ./restart0/restart.0
+#srun --mpi=pmi2 -n 512 ./WHAM-phase2-3d.Linux --restore ./restart2/restart.0  --modify deck/modify_num_step.txt

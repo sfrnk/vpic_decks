@@ -1,0 +1,9 @@
+README
+======
+
+If you want to restart simulation and alter num_steps,
+1. Change deck/modify_num_step.txt
+2. Add --modify [filename] to VPIC executable in Slurm submit script.
+3. Modify deck particle injection code to point to correct restart-dump number
+   (currently it's a hard-coded constant).
+4. Submit the job.
