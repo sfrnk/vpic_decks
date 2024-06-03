@@ -25,7 +25,7 @@
 
 #include <vector>
 
-#include "dump_info.cxx"
+//#include "dump_info.cxx"
 #include "injection_aaron.cxx"
 #include "magnetic_field.cxx"
 #include "plasma_profile.cxx"
@@ -1019,7 +1019,7 @@ begin_initialization {
     dnms.push_back("/use_injector"); dvs.push_back( use_injector );
 
     // Almost done, write out file to disk
-    dump_info("info.hdf5", ivs, inms, dvs, dnms);
+    //dump_info("info.hdf5", ivs, inms, dvs, dnms);
   }
 
 #undef BXHTS
